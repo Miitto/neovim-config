@@ -3,16 +3,33 @@
 --
 -- See the kickstart.nvim README for more information
 return {
-    "mbbill/undotree",
-    "theprimeagen/harpoon",
-    {
-        "NeogitOrg/neogit",
-        requires = {
-            "nvim-lua/plenary.nvim",         -- required
-            "sindrets/diffview.nvim",        -- optional - Diff integration
-
-            -- Only one of these is needed, not both.
-            "nvim-telescope/telescope.nvim", -- optional
-        },
-    }
+	"mbbill/undotree",
+	"theprimeagen/harpoon",
+	{
+		"catppuccin/nvim",
+		name = "catppuccin",
+		priority = 999,
+		init = function()
+			vim.cmd.colorscheme("catppuccin-mocha")
+		end,
+	},
+	{
+		"kdheepak/lazygit.nvim",
+		cmd = {
+			"LazyGit",
+			"LazyGitConfig",
+			"LazyGitCurrentFile",
+			"LazyGitFilter",
+			"LazyGitFilterCurrentFile",
+		},
+		-- optional for floating window border decoration
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+		},
+		-- setting the keybinding for LazyGit with 'keys' is recommended in
+		-- order to load the plugin when the command is run for the first time
+		keys = {
+			{ "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
+		},
+	},
 }
