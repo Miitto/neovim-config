@@ -96,23 +96,24 @@ require("lazy").setup({
 			-- Document existing key chains
 			require("which-key").add({
 				{ "<leader>c", group = "[C]ode" },
-  { "<leader>c_", hidden = true },
-  { "<leader>d", group = "[D]ocument" },
-  { "<leader>d_", hidden = true },
-  { "<leader>h", group = "Git [H]unk" },
-  { "<leader>h_", hidden = true },
-  { "<leader>r", group = "[R]ename" },
-  { "<leader>r_", hidden = true },
-  { "<leader>s", group = "[S]earch" },
-  { "<leader>s_", hidden = true },
-  { "<leader>t", group = "[T]oggle" },
-  { "<leader>t_", hidden = true },
-  { "<leader>w", group = "[W]orkspace" },
-  { "<leader>w_", hidden = true }
+				{ "<leader>c_", hidden = true },
+				{ "<leader>d", group = "[D]ocument" },
+				{ "<leader>d_", hidden = true },
+				{ "<leader>h", group = "Git [H]unk" },
+				{ "<leader>h_", hidden = true },
+				{ "<leader>r", group = "[R]ename" },
+				{ "<leader>r_", hidden = true },
+				{ "<leader>s", group = "[S]earch" },
+				{ "<leader>s_", hidden = true },
+				{ "<leader>t", group = "[T]oggle" },
+				{ "<leader>t_", hidden = true },
+				{ "<leader>w", group = "[W]orkspace" },
+				{ "<leader>w_", hidden = true },
 			})
 			-- visual mode
 			require("which-key").add({
-				{ "<leader>h", desc = "Git [H]unk", mode = "v" },})
+				{ "<leader>h", desc = "Git [H]unk", mode = "v" },
+			})
 		end,
 	},
 
@@ -214,6 +215,10 @@ require("lazy").setup({
 			vim.keymap.set("n", "<leader>sn", function()
 				builtin.find_files({ cwd = vim.fn.stdpath("config") })
 			end, { desc = "[S]earch [N]eovim files" })
+
+			vim.keymap.set("n", "<leader>sc", function()
+				builtin.find_files({ cwd = "~/.config" })
+			end, { desc = "[S]earch [C]onfig files" })
 		end,
 	},
 
@@ -244,6 +249,8 @@ require("lazy").setup({
 					-- NOTE: Remember that Lua is a real programming language, and as such it is possible
 					-- to define small helper and utility functions so you don't have to repeat yourself.
 					--
+
+					require("miitto.autocommands").lsp_attach(event)
 					-- In this case, we create a function that lets us more easily define mappings specific
 					-- for LSP related items. It sets the mode, buffer and description for us each time.
 					local map = function(keys, func, desc)
@@ -330,6 +337,7 @@ require("lazy").setup({
 					--
 					-- This may be unwanted, since they displace some of your code
 					if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
+						vim.lsp.inlay_hint.enable()
 						map("<leader>th", function()
 							vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 						end, "[T]oggle Inlay [H]ints")
@@ -357,7 +365,6 @@ require("lazy").setup({
 				-- clangd = {},
 				-- gopls = {},
 				pyright = {},
-				rust_analyzer = {},
 				-- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
 				--
 				-- Some languages (like typescript) have entire language plugins that can be useful:
