@@ -37,4 +37,15 @@ return {
 		version = "^5", -- Recommended
 		lazy = false, -- This plugin is already lazy
 	},
+	{
+		"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+		config = function()
+			require("lsp_lines").setup()
+			vim.diagnostic.config({
+				virtual_text = false,
+			})
+			vim.diagnostic.config({ virtual_lines = true })
+			vim.keymap.set("n", "<leader>tl", require("lsp_lines").toggle, { desc = "[T]oggle [L]sp Lines" })
+		end,
+	},
 }
