@@ -9,9 +9,14 @@ return {
 		"catppuccin/nvim",
 		name = "catppuccin",
 		priority = 999,
-		init = function()
+		config = function()
 			vim.cmd.colorscheme("catppuccin-mocha")
 		end,
+		opts = {
+			integrations = {
+				harpoon = true,
+			},
+		},
 	},
 	{
 		"kdheepak/lazygit.nvim",
@@ -47,5 +52,27 @@ return {
 			vim.diagnostic.config({ virtual_lines = true })
 			vim.keymap.set("n", "<leader>tl", require("lsp_lines").toggle, { desc = "[T]oggle [L]sp Lines" })
 		end,
+	},
+	{
+		"nvim-lualine/lualine.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		opts = {
+			theme = "catppuccin",
+		},
+	},
+	{
+		"folke/noice.nvim",
+		event = "VeryLazy",
+		opts = {
+			-- add any options here
+		},
+		dependencies = {
+			-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+			"MunifTanjim/nui.nvim",
+			-- OPTIONAL:
+			--   `nvim-notify` is only needed, if you want to use the notification view.
+			--   If not available, we use `mini` as the fallback
+			"rcarriga/nvim-notify",
+		},
 	},
 }

@@ -1,3 +1,0 @@
--- require("miitto.remap")
--- require("miitto.packer")
--- require("miitto.set")
