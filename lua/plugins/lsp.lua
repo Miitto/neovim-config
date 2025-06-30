@@ -1,6 +1,7 @@
 vim.filetype.add({
   extension = {
     ixx = "cpp",
+    cxx = "cpp",
   },
 })
 
