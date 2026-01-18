@@ -8,23 +8,21 @@ vim.filetype.add({
 return {
   "neovim/nvim-lspconfig",
   opts = function(_, opts)
-    local keys = require("lazyvim.plugins.lsp.keymaps").get()
-
-    keys[#keys + 1] = {
-      "K",
-      function()
-        return vim.lsp.buf.hover({ border = "rounded" })
-      end,
-      desc = "Hover",
-    }
-
     opts.diagnostics = {
       float = {
         border = "rounded",
       },
     }
 
+    opts.servers["*"].keys["K"] = {
+      function()
+        return vim.lsp.buf.hover({ border = "rounded" })
+      end,
+      desc = "Hover",
+    }
+
     opts.servers.clangd = {
+      mason = false,
       cmd = {
         "clangd",
         "--experimental-modules-support",

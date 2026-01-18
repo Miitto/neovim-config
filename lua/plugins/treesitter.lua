@@ -1,22 +1,14 @@
 return {
   "nvim-treesitter/nvim-treesitter",
   opts = {
+    auto_install = true,
     indent = { enable = false },
     ensure_installed = {
-      "bash",
-      "html",
-      "javascript",
-      "json",
-      "lua",
-      "markdown",
+      "comment",
       "markdown_inline",
-      "python",
+      "json",
       "query",
       "regex",
-      "tsx",
-      "typescript",
-      "vim",
-      "yaml",
     },
   },
 }
