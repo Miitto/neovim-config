@@ -7,6 +7,9 @@ vim.o.foldlevel = 99
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
 
+-- Enable .nvim.lau support
+vim.o.exrc = true
+
 if vim.loop.os_uname().sysname == "Windows_NT" then
   vim.o.shell = "pwsh.exe -noLogo"
 end
